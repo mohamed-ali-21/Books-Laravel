@@ -69,7 +69,8 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $input = Book::find($id);
+        return view('Book.Edit')->with('data', $input);
     }
 
     /**
@@ -81,7 +82,10 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $upnew = $request->all(); 
+        $input = Book::find($id);
+        $input->update($upnew);
+        return redirect()->action([BookController::class, 'index']);
     }
 
     /**
