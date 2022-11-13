@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/book', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/book/create/page', [App\Http\Controllers\BookController::class, 'create']);
 Route::post('/book/create', [App\Http\Controllers\BookController::class, 'cre']);
+Route::delete('/book/delete/{id}', [App\Http\Controllers\BookController::class, 'destroy']);

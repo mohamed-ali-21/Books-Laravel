@@ -45,10 +45,9 @@ class BookController extends Controller
         $input = $data->all();
         Book::create([
             'name'=>$input['name'],
-            'borrower'=>$input['borrower'],
             'user_id'=>null
         ]);
-        redirect('Book.Create')->with('message', 'success');
+        return redirect()->action([BookController::class, 'index']);
     }
 
     /**
@@ -93,6 +92,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Book::destroy($id);
+        return redirect()->action([BookController::class, 'index']);
     }
 }
