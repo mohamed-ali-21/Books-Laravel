@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Ui\Presets\React;
 
 class BookController extends Controller
@@ -20,7 +21,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $userId = Auth::user()->id;
+        $books = Book::all()->where('user_id', '=', $userId);
         return view('Book.Index')->with('books', $books);
     }
 
@@ -44,10 +46,20 @@ class BookController extends Controller
     {
         $input = $data->all();
         Book::create([
-            'name'=>$input['name'],
+            'book_name'=>$input['book_name'],
             'user_id'=>null
         ]);
         return redirect()->action([BookController::class, 'index']);
+    }
+
+    public function getBook($id)
+    {
+        $userId = Auth::user()->id;
+        $book = Book::find($id);
+        $book->user_id = $userId;
+        $book->update();
+
+        return redirect()->action([HomeController::class, 'index']);
     }
 
     /**

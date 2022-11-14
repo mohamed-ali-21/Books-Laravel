@@ -21,9 +21,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/book', [App\Http\Controllers\BookController::class, 'index']);
 Route::get('/book/create/page', [App\Http\Controllers\BookController::class, 'create']);
 Route::post('/book/create', [App\Http\Controllers\BookController::class, 'cre']);
 Route::delete('/book/delete/{id}', [App\Http\Controllers\BookController::class, 'destroy']);
 Route::get('/book/edit/{id}', [App\Http\Controllers\BookController::class, 'edit']);
 Route::patch('book/Update/{id}', [App\Http\Controllers\BookController::class, 'Update']);
+Route::get('book/get/{id}', [App\Http\Controllers\BookController::class, 'getBook']);

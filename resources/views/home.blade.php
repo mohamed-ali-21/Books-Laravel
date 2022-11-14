@@ -1,23 +1,32 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">BORROWER</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach ($books as $book)
+            <tr>
+                <td scope="row">{{$book->id}}</td>
+                <td>{{$book->book_name}}</td>
+                @if($book->user == null)
+                <td style="color: blue">Available</td>
+                <td>
+                    <a href="{{url('/book/get/' . $book->id)}}" class="btn btn-success">Get</a>
+                </td>
+                @else
+                <td>{{$book->user->name}}</td>
+                <td style="color: red">Not Available</td>
+                @endif
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div> 
 @endsection
