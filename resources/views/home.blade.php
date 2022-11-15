@@ -22,7 +22,13 @@
                 </td>
                 @else
                 <td>{{$book->user->name}}</td>
-                <td style="color: red">Not Available</td>
+                    @if($userId == $book->user_id)
+                        <td>
+                            <a href="{{url('/book/returns/' . $book->id)}}" class="btn btn-dark">Returns</a>
+                        </td>
+                    @else
+                        <td style="color: red">Not Available</td>
+                    @endif
                 @endif
             </tr>
             @endforeach

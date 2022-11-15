@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -18,15 +19,12 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    // Get books for home page
     public function index()
     {
         $books = Book::with('user')->get();
+        $userId = Auth::user()->id;
 
-        return view('home')->with('books', $books);
+        return view('home')->with('books', $books)->with('userId', $userId);
     }
 }

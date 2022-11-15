@@ -29,3 +29,4 @@ Route::delete('/book/delete/{id}', [App\Http\Controllers\BookController::class, 
 Route::get('/book/edit/{id}', [App\Http\Controllers\BookController::class, 'edit']);
 Route::patch('book/Update/{id}', [App\Http\Controllers\BookController::class, 'Update']);
 Route::get('book/get/{id}', [App\Http\Controllers\BookController::class, 'getBook']);
+Route::get('/book/returns/{id}', [App\Http\Controllers\BookController::class, 'returnBook']);
